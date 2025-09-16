@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="favicon.ico">
+  <title>IDev Viewer Vue 예제</title>
+  <script src="idev-viewer.js"></script>
+  <script>
+    // Flutter 앱 환경 설정 강제 변경
+    function forceFlutterEnvironment() {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        try {
+          if (iframe.contentWindow) {
+            const flutterWindow = iframe.contentWindow;
+
+            // 환경 설정 강제 변경
+            flutterWindow.ENVIRONMENT = 'development';
+
+            // String.fromEnvironment 오버라이드
+            if (flutterWindow.String && flutterWindow.String.fromEnvironment) {
+              const originalStringFromEnvironment = flutterWindow.String.fromEnvironment;
+              flutterWindow.String.fromEnvironment = function (name, { defaultValue } = {}) {
+                if (name === 'ENVIRONMENT') return 'development';
+                return originalStringFromEnvironment.call(this, name, { defaultValue });
+              };
+            }
+
+            // AppConfig 설정
+            if (flutterWindow.AppConfig && flutterWindow.AppConfig.instance) {
+              try {
+                flutterWindow.AppConfig.instance.currentEnvironment = 'development';
+                flutterWindow.AppConfig.instance.apiHostAws = 'https://fuv3je9sl0.execute-api.ap-northeast-2.amazonaws.com';
+                flutterWindow.AppConfig.instance.apiHostLegacyBase = 'https://fuv3je9sl0.execute-api.ap-northeast-2.amazonaws.com';
+                flutterWindow.AppConfig.instance.apiHostLegacySite = 'https://fuv3je9sl0.execute-api.ap-northeast-2.amazonaws.com';
+              } catch (e) {
+                console.log('AppConfig 설정 오류:', e.message);
+              }
+            }
+
+            // AuthService 설정
+            if (flutterWindow.AuthService && flutterWindow.AuthService.instance) {
+              try {
+                flutterWindow.AuthService.instance.forceViewerAuth = true;
+                flutterWindow.AuthService.instance.skipLocalTempAuth = true;
+                flutterWindow.AuthService.instance.allowLocalTempAuth = false;
+              } catch (e) {
+                console.log('AuthService 설정 오류:', e.message);
+              }
+            }
+
+            // ViewerAuthService 설정
+            if (flutterWindow.ViewerAuthService && flutterWindow.ViewerAuthService.instance) {
+              try {
+                flutterWindow.ViewerAuthService.instance.isEnabled = true;
+                flutterWindow.ViewerAuthService.instance.forceEnabled = true;
+                flutterWindow.ViewerAuthService.instance.autoInit = true;
+
+                if (flutterWindow.ViewerAuthService.instance.apiKey === undefined) {
+                  flutterWindow.ViewerAuthService.instance.apiKey = '7e074a90e6128deeab38d98765e82abe39ec87449f077d7ec85f328357f96b50';
+                }
+
+                if (typeof flutterWindow.ViewerAuthService.instance.initialize === 'function') {
+                  flutterWindow.ViewerAuthService.instance.initialize();
+                }
+              } catch (e) {
+                console.log('ViewerAuthService 설정 오류:', e.message);
+              }
+            }
+
+            // iframe 내부 네트워크 요청 가로채기
+            if (flutterWindow.fetch) {
+              const originalIframeFetch = flutterWindow.fetch;
+              flutterWindow.fetch = function (url, options) {
+                if (typeof url === 'string' && url.includes('localhost:3000')) {
+                  const newUrl = url.replace('localhost:3000', '17kj30av8h.execute-api.ap-northeast-2.amazonaws.com');
+                  return originalIframeFetch.call(this, newUrl, options);
+                }
+                return originalIframeFetch.call(this, url, options);
+              };
+            }
+
+            if (flutterWindow.XMLHttpRequest) {
+              const originalIframeOpen = flutterWindow.XMLHttpRequest.prototype.open;
+              flutterWindow.XMLHttpRequest.prototype.open = function (method, url, ...args) {
+                if (typeof url === 'string' && url.includes('localhost:3000')) {
+                  const newUrl = url.replace('localhost:3000', '17kj30av8h.execute-api.ap-northeast-2.amazonaws.com');
+                  return originalIframeOpen.call(this, method, newUrl, ...args);
+                }
+                return originalIframeOpen.call(this, method, url, ...args);
+              };
+            }
+          }
+        } catch (e) {
+          // CORS 오류 무시
+        }
+      });
+    }
+
+    // DOM 변경 감지하여 iframe 로드 시 환경 설정 적용
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.tagName === 'IFRAME') {
+              setTimeout(forceFlutterEnvironment, 1000);
+            }
+          });
+        }
+      });
+    });
+
+    // 페이지 로드 완료 후 감지 시작
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        observer.observe(document.body, { childList: true, subtree: true });
+        setTimeout(forceFlutterEnvironment, 2000);
+      });
+    } else {
+      observer.observe(document.body, { childList: true, subtree: true });
+      setTimeout(forceFlutterEnvironment, 2000);
+    }
+
+    // 주기적으로 환경 설정 확인 및 적용
+    setInterval(forceFlutterEnvironment, 3000);
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+</body>
+
+</html>

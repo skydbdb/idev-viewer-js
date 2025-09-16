@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="React에서 IDev Viewer를 사용하는 예제" />
+  <title>IDev Viewer React 예제</title>
+
+  <!-- IDev Viewer 라이브러리 로드 -->
+  <script src="%PUBLIC_URL%/idev-viewer.js"></script>
+  <script>
+    // 라이브러리 로드 확인
+    window.addEventListener('load', function () {
+      console.log('🌐 페이지 로드 완료');
+      if (typeof window.IdevViewer !== 'undefined') {
+        console.log('✅ IDev Viewer 라이브러리 로드 확인됨');
+        console.log('버전:', window.IdevViewer.getVersion());
+      } else {
+        console.error('❌ IDev Viewer 라이브러리 로드 실패');
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+
+</html>

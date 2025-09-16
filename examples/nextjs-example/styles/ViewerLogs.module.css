@@ -1,0 +1,76 @@
+.logPanel {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #e9ecef;
+}
+
+.logPanel h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.logContainer {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.logEntry {
+    margin: 0;
+    padding: 2px 0;
+    border-bottom: 1px dotted #e9ecef;
+    color: #333;
+    line-height: 1.4;
+}
+
+.logEntry:last-child {
+    border-bottom: none;
+}
+
+.emptyLog {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* 스크롤바 스타일링 */
+.logContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.logContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.logContainer::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.logContainer::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+@media (max-width: 768px) {
+    .logPanel {
+        padding: 1rem;
+    }
+
+    .logContainer {
+        max-height: 150px;
+        font-size: 11px;
+    }
+}

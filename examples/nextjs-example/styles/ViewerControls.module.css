@@ -1,0 +1,96 @@
+.controls {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.buttonGroup:last-child {
+    margin-bottom: 0;
+}
+
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.primary:not(:disabled):hover {
+    background-color: #0056b3;
+}
+
+.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.secondary:not(:disabled):hover {
+    background-color: #5a6268;
+}
+
+.danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.danger:not(:disabled):hover {
+    background-color: #c82333;
+}
+
+.fileButton {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.fileButton input[type="file"] {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .buttonGroup {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .controls {
+        padding: 1rem;
+    }
+}

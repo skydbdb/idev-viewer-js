@@ -1,0 +1,428 @@
+[
+  {
+    "boardId": "#TEMPLATE#",
+    "id": "Layout_1lr1qlp",
+    "type": "StackLayoutItem",
+    "angle": 0,
+    "size": {
+      "width": 1136,
+      "height": 655
+    },
+    "offset": {
+      "dx": 0,
+      "dy": 0
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "directionLtr": true,
+      "bodyOrientation": "horizontal",
+      "bodyRatio": 0.5,
+      "title": "",
+      "profile": "IDEV 시스템",
+      "appBar": "none",
+      "actions": "none",
+      "drawer": "smallAndUp",
+      "topNavigation": "none",
+      "leftNavigation": "smallAndUp",
+      "rightNavigation": "none",
+      "bottomNavigation": "none",
+      "subBody": "mediumAndUp",
+      "subBodyOptions": "detail",
+      "reqMenus": "[{\"menuId\":\"home\",\"label\":\"홈\",\"icon\":\"Icons.home\",\"script\":\"\",\"templateId\":\"\",\"subTemplateId\":\"\"},{\"menuId\":\"settings\",\"label\":\"설정\",\"icon\":\"Icons.settings\",\"script\":\"\",\"templateId\":\"\",\"subTemplateId\":\"\"},{\"menuId\":\"add\",\"label\":\"추가\",\"icon\":\"Icons.add\",\"script\":\"\",\"templateId\":\"\",\"subTemplateId\":\"\"}]",
+      "selectedIndex": 0
+    }
+  },
+  {
+    "boardId": "body_1cb4tif",
+    "id": "Frame_vab2ec",
+    "type": "StackFrameItem",
+    "angle": 0,
+    "size": {
+      "width": 800,
+      "height": 500
+    },
+    "offset": {
+      "dx": 40,
+      "dy": 30
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": true,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "tabsVisible": true,
+      "dividerThickness": 6,
+      "tabsTitle": "[{\"tabIndex\":1,\"title\":\"Tab 1\",\"boardId\":\"Frame_vab2ec_1\"},{\"tabIndex\":2,\"title\":\"Tab 2\",\"boardId\":\"Frame_vab2ec_2\"}]",
+      "lastStringify": "V1:3:1(C;0;;0.5;2,3),2(I;1;1;0.1791375225631769;F),3(I;1;2;0.8208624774368231;F)"
+    }
+  },
+  {
+    "boardId": "Frame_vab2ec_1",
+    "id": "Search_1dfpvqn",
+    "type": "StackSearchItem",
+    "angle": 0,
+    "size": {
+      "width": 200,
+      "height": 50
+    },
+    "offset": {
+      "dx": 0,
+      "dy": 0
+    },
+    "padding": {
+      "left": 10,
+      "top": 10,
+      "right": 10,
+      "bottom": 10
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": true,
+    "permission": "all",
+    "theme": "White",
+    "content": {
+      "buttonName": "조회",
+      "reqApis": "[{\"apiId\":\"IDEV-EMP_R\\n인사정보 조회\",\"field\":\"id\",\"type\":\"text\",\"fieldNm\":\"id\",\"width\":\"120\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\\n인사정보 조회\",\"field\":\"name\",\"type\":\"text\",\"fieldNm\":\"name\",\"width\":\"120\",\"format\":\"default\",\"enabled\":true}]"
+    }
+  },
+  {
+    "boardId": "Frame_vab2ec_2",
+    "id": "Grid_1o5nnim",
+    "type": "StackGridItem",
+    "angle": 0,
+    "size": {
+      "width": 800,
+      "height": 500
+    },
+    "offset": {
+      "dx": 0,
+      "dy": 0
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "headerTitle": "인사정보 조회",
+      "apiId": "IDEV-EMP_R",
+      "reqApis": "[]",
+      "resApis": "[{\"apiId\":\"IDEV-EMP_R\",\"field\":\"id\",\"type\":\"text\",\"fieldNm\":\"id\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"name\",\"type\":\"text\",\"fieldNm\":\"name\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"gender\",\"type\":\"text\",\"fieldNm\":\"gender\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"age\",\"type\":\"text\",\"fieldNm\":\"age\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"department\",\"type\":\"text\",\"fieldNm\":\"department\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"position\",\"type\":\"text\",\"fieldNm\":\"position\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"hire_date\",\"type\":\"text\",\"fieldNm\":\"hire_date\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"email\",\"type\":\"text\",\"fieldNm\":\"email\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"phone\",\"type\":\"text\",\"fieldNm\":\"phone\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"photo_url\",\"type\":\"text\",\"fieldNm\":\"photo_url\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true}]",
+      "colGroups": "",
+      "columnAggregate": {},
+      "groupByColumns": [],
+      "mode": "normal",
+      "showRowNum": true,
+      "enableRowChecked": false,
+      "showColumn": true,
+      "enableColumnFilter": false,
+      "enableColumnAggregate": false,
+      "showFooter": true
+    }
+  },
+  {
+    "boardId": "subBody_1osu8fv",
+    "id": "Image_5ssgaa",
+    "type": "StackImageItem",
+    "angle": 0,
+    "size": {
+      "width": 200,
+      "height": 50
+    },
+    "offset": {
+      "dx": 0,
+      "dy": 0
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": true,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "url": "",
+      "assetName": "assets/images/idev.jpeg",
+      "color": "transparent",
+      "colorBlendMode": "color",
+      "fit": "scaleDown",
+      "repeat": "repeat"
+    }
+  },
+  {
+    "boardId": "body_6ux7zf",
+    "id": "Search_1eh3vx7",
+    "type": "StackSearchItem",
+    "angle": 0,
+    "size": {
+      "width": 340,
+      "height": 67
+    },
+    "offset": {
+      "dx": 20,
+      "dy": 20
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "all",
+    "theme": "White",
+    "content": {
+      "buttonName": "조회",
+      "reqApis": "[{\"apiId\":\"IDEV-EMP_R\\n인사정보 조회\",\"field\":\"id\",\"type\":\"text\",\"fieldNm\":\"id\",\"width\":\"120\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\\n인사정보 조회\",\"field\":\"name\",\"type\":\"text\",\"fieldNm\":\"name\",\"width\":\"120\",\"format\":\"default\",\"enabled\":true}]"
+    }
+  },
+  {
+    "boardId": "body_6ux7zf",
+    "id": "Grid_1oq2jxt",
+    "type": "StackGridItem",
+    "angle": 0,
+    "size": {
+      "width": 350,
+      "height": 347
+    },
+    "offset": {
+      "dx": 20,
+      "dy": 204
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "headerTitle": "인사정보 조회",
+      "apiId": "IDEV-EMP_R",
+      "reqApis": "[{\"apiId\":\"IDEV-EMP_SALES_R\\n사원별 월별 매출 조회\",\"field\":\"emp_id\",\"type\":\"text\",\"fieldNm\":\"id\",\"width\":\"120\",\"format\":\"default\",\"enabled\":true}]",
+      "resApis": "[{\"apiId\":\"IDEV-EMP_R\",\"field\":\"id\",\"type\":\"text\",\"fieldNm\":\"id\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"name\",\"type\":\"text\",\"fieldNm\":\"name\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"gender\",\"type\":\"text\",\"fieldNm\":\"gender\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"age\",\"type\":\"text\",\"fieldNm\":\"age\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"department\",\"type\":\"text\",\"fieldNm\":\"department\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"position\",\"type\":\"text\",\"fieldNm\":\"position\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"hire_date\",\"type\":\"text\",\"fieldNm\":\"hire_date\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"email\",\"type\":\"text\",\"fieldNm\":\"email\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"phone\",\"type\":\"text\",\"fieldNm\":\"phone\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true},{\"apiId\":\"IDEV-EMP_R\",\"field\":\"photo_url\",\"type\":\"text\",\"fieldNm\":\"photo_url\",\"width\":\"100\",\"format\":\"default\",\"enabled\":true}]",
+      "colGroups": "",
+      "columnAggregate": {},
+      "groupByColumns": [],
+      "mode": "select",
+      "showRowNum": true,
+      "enableRowChecked": false,
+      "showColumn": true,
+      "enableColumnFilter": false,
+      "enableColumnAggregate": false,
+      "showFooter": true
+    }
+  },
+  {
+    "boardId": "subBody_1qopym7",
+    "id": "Chart_6th0z",
+    "type": "StackChartItem",
+    "angle": 0,
+    "size": {
+      "width": 400,
+      "height": 400
+    },
+    "offset": {
+      "dx": 0,
+      "dy": 0
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": true,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "chartType": "column",
+      "dataSource": [
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-01",
+          "sum_A": "549078",
+          "sum_B": "725495",
+          "sum_C": "1339071",
+          "sum_D": "1161602"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-03",
+          "sum_A": "607710",
+          "sum_B": "183970",
+          "sum_C": "22395",
+          "sum_D": "403740"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-04",
+          "sum_A": "255411",
+          "sum_B": "535722",
+          "sum_C": "427460",
+          "sum_D": "224480"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-05",
+          "sum_A": "736112",
+          "sum_B": "458060",
+          "sum_C": "464935",
+          "sum_D": "492255"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-06",
+          "sum_A": "869180",
+          "sum_B": "245746",
+          "sum_C": "194840",
+          "sum_D": "196416"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-07",
+          "sum_A": "583815",
+          "sum_B": "177303",
+          "sum_C": "454030",
+          "sum_D": "651338"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-08",
+          "sum_A": "803930",
+          "sum_B": "704064",
+          "sum_C": "604702",
+          "sum_D": "122376"
+        },
+        {
+          "emp_id": 1004,
+          "sales_month": "2023-09",
+          "sum_A": "553214",
+          "sum_B": "800568",
+          "sum_C": "289170",
+          "sum_D": "341671"
+        }
+      ],
+      "apiId": "IDEV-EMP_SALES_R",
+      "reqApis": "[]",
+      "xValueMapper": "sales_month",
+      "yValueMapper": [
+        {
+          "sum_A": "sum_A"
+        },
+        {
+          "sum_B": "sum_B"
+        }
+      ],
+      "title": "",
+      "showLegend": true,
+      "showTooltip": true,
+      "enableZoom": true,
+      "enablePan": true,
+      "showDataLabels": false,
+      "primaryXAxisType": "category",
+      "xAxisLabelFormat": "default",
+      "primaryYAxisType": "numeric",
+      "yAxisLabelFormat": "currency_kr",
+      "selectionType": "cluster",
+      "autoScrollingMode": "start",
+      "autoScrollingDelta": 2
+    }
+  },
+  {
+    "boardId": "body_1yapzq1",
+    "id": "Text_1d36yoe",
+    "type": "StackTextItem",
+    "angle": 0,
+    "size": {
+      "width": 120,
+      "height": 50
+    },
+    "offset": {
+      "dx": 91,
+      "dy": 91
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "data": "Text"
+    }
+  },
+  {
+    "boardId": "subBody_b4jxdx",
+    "id": "Image_1rm4d24",
+    "type": "StackImageItem",
+    "angle": 0,
+    "size": {
+      "width": 338,
+      "height": 119
+    },
+    "offset": {
+      "dx": 72,
+      "dy": 154
+    },
+    "padding": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "status": 6,
+    "lockZOrder": false,
+    "dock": false,
+    "permission": "read",
+    "theme": "White",
+    "content": {
+      "url": "",
+      "assetName": "assets/images/idev.jpeg",
+      "color": "red",
+      "colorBlendMode": "color",
+      "fit": "scaleDown",
+      "repeat": "repeat"
+    }
+  }
+]

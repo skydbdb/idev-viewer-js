@@ -1,0 +1,49 @@
+{
+    "name": "idev-viewer",
+    "version": "1.0.0",
+    "description": "IDev-based template viewer with 100% identical rendering",
+    "main": "dist/idev-viewer.js",
+    "module": "dist/idev-viewer.esm.js",
+    "types": "dist/idev-viewer.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/idev-viewer.esm.js",
+            "require": "./dist/idev-viewer.js"
+        }
+    },
+    "files": [
+        "dist/",
+        "idev-app/",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.0",
+        "@rollup/plugin-terser": "^0.4.0",
+        "rollup": "^3.0.0"
+    },
+    "keywords": [
+        "idev",
+        "viewer",
+        "template",
+        "iframe",
+        "flutter",
+        "web"
+    ],
+    "author": "IDev Team",
+    "type": "module",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/idev/viewer.git"
+    },
+    "homepage": "https://github.com/idev/viewer#readme",
+    "bugs": {
+        "url": "https://github.com/idev/viewer/issues"
+    }
+}

@@ -1,0 +1,127 @@
+.container {
+    min-height: 100vh;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.main {
+    padding: 2rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.description {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.infoPanel {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #e9f7ef;
+    border-left: 5px solid #28a745;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.infoPanel h3 {
+    margin: 0 0 1rem 0;
+    color: #28a745;
+    font-size: 1.2rem;
+}
+
+.infoPanel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.infoPanel li {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.infoPanel code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #e83e8c;
+}
+
+.viewerContainer {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2rem 0;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d;
+    position: relative;
+}
+
+.placeholder {
+    text-align: center;
+    padding: 50px;
+    color: #6c757d;
+}
+
+.placeholder h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.placeholder p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin: 10px;
+        padding: 1rem 0;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .viewerContainer {
+        height: 400px;
+    }
+}
