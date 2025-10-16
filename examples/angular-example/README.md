@@ -15,7 +15,7 @@ npm start
 ```
 
 ### 3. 브라우저에서 확인
-- http://localhost:4200 으로 접속
+- http://localhost:3000 으로 접속
 - IDev Viewer가 Angular 앱에 통합되어 렌더링되는 것을 확인
 
 ## 🔧 주요 기능

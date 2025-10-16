@@ -5,9 +5,11 @@
 ## 🚀 특징
 
 - ✅ **간단한 사용법**: npm install로 설치, 간단한 API로 사용
-- ✅ **모든 프레임워크 호환**: React, Vue, Angular, Next.js, Vanilla JS 등
+- ✅ **모든 프레임워크 호환**: React, Vue, Angular, Next.js, Svelte, Vanilla JS 등
 - ✅ **TypeScript 지원**: 완전한 타입 정의 제공
 - ✅ **빌드 시스템**: Rollup 기반으로 최적화된 번들 제공
+- ✅ **완전한 예제**: 각 프레임워크별 완전한 예제 프로젝트 제공
+- ✅ **CORS 해결**: 개발 환경에서 프록시 설정으로 CORS 문제 해결
 
 ## 📦 설치
 
@@ -243,6 +245,380 @@ function IdevViewerComponent({ template, config }) {
 export default IdevViewerComponent;
 ```
 
+### Angular 예제
+
+```typescript
+// idev-viewer.service.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class IdevViewerService {
+    private viewer: any = null;
+    public isLibraryLoadedSubject = new BehaviorSubject<boolean>(false);
+    public isViewerReadySubject = new BehaviorSubject<boolean>(false);
+
+    constructor() {
+        this.loadScript();
+    }
+
+    private loadScript() {
+        const script = document.createElement('script');
+        script.src = '/assets/idev-viewer.js';
+        script.async = true;
+        script.onload = () => {
+            this.isLibraryLoadedSubject.next(true);
+        };
+        document.head.appendChild(script);
+    }
+
+    createViewer(options: any) {
+        if (!this.isLibraryLoadedSubject.value) {
+            throw new Error('IDev Viewer 라이브러리가 아직 로드되지 않았습니다.');
+        }
+
+        this.viewer = new (window as any).IdevViewer(options);
+        this.isViewerReadySubject.next(true);
+        return this.viewer;
+    }
+
+    updateTemplate(template: any) {
+        if (this.viewer) {
+            this.viewer.updateTemplate(template);
+        }
+    }
+
+    destroyViewer() {
+        if (this.viewer) {
+            this.viewer.destroy();
+            this.viewer = null;
+            this.isViewerReadySubject.next(false);
+        }
+    }
+}
+```
+
+```typescript
+// app.component.ts
+import { Component, OnInit } from '@angular/core';
+import { IdevViewerService } from './services/idev-viewer.service';
+
+@Component({
+    selector: 'app-root',
+    template: `
+        <div id="viewer-container"></div>
+        <button (click)="initViewer()" [disabled]="!isLibraryLoaded">초기화</button>
+        <button (click)="updateTemplate()" [disabled]="!isViewerReady">템플릿 업데이트</button>
+    `
+})
+export class AppComponent implements OnInit {
+    isLibraryLoaded = false;
+    isViewerReady = false;
+
+    constructor(private idevViewerService: IdevViewerService) {}
+
+    ngOnInit() {
+        this.idevViewerService.isLibraryLoaded.subscribe(loaded => {
+            this.isLibraryLoaded = loaded;
+        });
+
+        this.idevViewerService.isViewerReady.subscribe(ready => {
+            this.isViewerReady = ready;
+        });
+    }
+
+    initViewer() {
+        this.idevViewerService.createViewer({
+            width: '100%',
+            height: '600px',
+            idevAppPath: './idev-app/',
+            template: {
+                script: JSON.stringify({ message: 'Hello from Angular!' }),
+                templateId: 'angular_template',
+                templateNm: 'Angular Template',
+                commitInfo: 'v1.0.0'
+            },
+            config: {
+                theme: 'dark',
+                locale: 'ko'
+            },
+            onReady: (data) => {
+                console.log('뷰어 준비 완료:', data);
+            },
+            onError: (error) => {
+                console.error('에러 발생:', error);
+            }
+        });
+    }
+
+    updateTemplate() {
+        this.idevViewerService.updateTemplate({
+            script: JSON.stringify({ message: 'Updated from Angular!' }),
+            templateId: 'updated_template',
+            templateNm: 'Updated Template',
+            commitInfo: 'v1.1.0'
+        });
+    }
+}
+```
+
+### Svelte 예제
+
+```svelte
+<!-- IdevViewer.svelte -->
+<script>
+    import { onMount, onDestroy } from 'svelte';
+    import { browser } from '$app/environment';
+
+    export let template = {};
+    export let config = {};
+    export let width = '100%';
+    export let height = '600px';
+
+    let container;
+    let viewer = null;
+    let isReady = false;
+    let isLibraryLoaded = false;
+
+    onMount(() => {
+        if (browser) {
+            loadScript();
+        }
+    });
+
+    onDestroy(() => {
+        if (viewer) {
+            viewer.destroy();
+        }
+    });
+
+    function loadScript() {
+        if (window.IdevViewer) {
+            setIsLibraryLoaded(true);
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/idev-viewer.js';
+        script.async = true;
+        script.onload = () => {
+            setIsLibraryLoaded(true);
+        };
+        document.head.appendChild(script);
+    }
+
+    function setIsLibraryLoaded(loaded) {
+        isLibraryLoaded = loaded;
+        if (loaded && container && !viewer) {
+            initViewer();
+        }
+    }
+
+    function initViewer() {
+        viewer = new window.IdevViewer({
+            width,
+            height,
+            idevAppPath: './idev-app/',
+            template,
+            config,
+            onReady: (data) => {
+                isReady = true;
+                console.log('뷰어 준비 완료:', data);
+            },
+            onError: (error) => {
+                console.error('에러 발생:', error);
+            }
+        });
+
+        viewer.mount(container);
+    }
+
+    $: if (viewer && isReady && template) {
+        viewer.updateTemplate(template);
+    }
+
+    $: if (viewer && isReady && config) {
+        viewer.updateConfig(config);
+    }
+</script>
+
+<div bind:this={container} class="idev-viewer-container" />
+
+<style>
+    .idev-viewer-container {
+        width: 100%;
+        height: 500px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+</style>
+```
+
+### Vanilla JavaScript 예제
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDev Viewer Vanilla Example</title>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #viewer-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IDev Viewer Vanilla JavaScript Example</h1>
+        
+        <div class="controls">
+            <button id="initBtn" disabled>초기화</button>
+            <button id="updateBtn" disabled>템플릿 업데이트</button>
+            <button id="destroyBtn" disabled>제거</button>
+        </div>
+        
+        <div id="viewer-container"></div>
+    </div>
+
+    <script src="./idev-viewer.js"></script>
+    <script>
+        class IdevViewerManager {
+            constructor() {
+                this.viewer = null;
+                this.isLibraryLoaded = false;
+                this.isReady = false;
+                
+                this.initBtn = document.getElementById('initBtn');
+                this.updateBtn = document.getElementById('updateBtn');
+                this.destroyBtn = document.getElementById('destroyBtn');
+                this.container = document.getElementById('viewer-container');
+                
+                this.setupEventListeners();
+                this.checkLibraryLoaded();
+            }
+
+            setupEventListeners() {
+                this.initBtn.addEventListener('click', () => this.initViewer());
+                this.updateBtn.addEventListener('click', () => this.updateTemplate());
+                this.destroyBtn.addEventListener('click', () => this.destroyViewer());
+            }
+
+            checkLibraryLoaded() {
+                const checkInterval = setInterval(() => {
+                    if (window.IdevViewer) {
+                        this.isLibraryLoaded = true;
+                        this.initBtn.disabled = false;
+                        clearInterval(checkInterval);
+                    }
+                }, 100);
+            }
+
+            initViewer() {
+                if (!this.isLibraryLoaded) {
+                    alert('라이브러리가 아직 로드되지 않았습니다.');
+                    return;
+                }
+
+                this.viewer = new window.IdevViewer({
+                    width: '100%',
+                    height: '600px',
+                    idevAppPath: './idev-app/',
+                    template: {
+                        script: JSON.stringify({
+                            message: 'Hello from Vanilla JavaScript!',
+                            widgets: [],
+                            layout: {}
+                        }),
+                        templateId: 'vanilla_template',
+                        templateNm: 'Vanilla Template',
+                        commitInfo: 'v1.0.0'
+                    },
+                    config: {
+                        theme: 'dark',
+                        locale: 'ko'
+                    },
+                    onReady: (data) => {
+                        this.isReady = true;
+                        this.updateBtn.disabled = false;
+                        this.destroyBtn.disabled = false;
+                        console.log('뷰어 준비 완료:', data);
+                    },
+                    onError: (error) => {
+                        console.error('에러 발생:', error);
+                        alert('뷰어 초기화 중 오류가 발생했습니다.');
+                    }
+                });
+
+                this.viewer.mount(this.container);
+            }
+
+            updateTemplate() {
+                if (!this.viewer || !this.isReady) {
+                    alert('뷰어가 초기화되지 않았습니다.');
+                    return;
+                }
+
+                this.viewer.updateTemplate({
+                    script: JSON.stringify({
+                        message: 'Updated from Vanilla JavaScript!',
+                        widgets: [],
+                        layout: {}
+                    }),
+                    templateId: 'updated_template',
+                    templateNm: 'Updated Template',
+                    commitInfo: 'v1.1.0'
+                });
+            }
+
+            destroyViewer() {
+                if (this.viewer) {
+                    this.viewer.destroy();
+                    this.viewer = null;
+                    this.isReady = false;
+                    this.updateBtn.disabled = true;
+                    this.destroyBtn.disabled = true;
+                    this.container.innerHTML = '';
+                }
+            }
+        }
+
+        // 페이지 로드 시 매니저 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            new IdevViewerManager();
+        });
+    </script>
+</body>
+</html>
+```
+
 ## 📋 API 레퍼런스
 
 ### 생성자 옵션
@@ -336,15 +712,64 @@ const state = viewer.getState();
 viewer.destroy();
 ```
 
+## 📁 예제 프로젝트
+
+각 프레임워크별로 완전한 예제 프로젝트가 제공됩니다:
+
+### 🚀 빠른 시작
+
+```bash
+# 예제 프로젝트 클론
+git clone https://github.com/skydbdb/idev-viewer-js.git
+cd idev-viewer-js/examples
+
+# 원하는 프레임워크 예제 실행
+cd angular-example && npm install && npm start
+cd react-example && npm install && npm start
+cd vue-example && npm install && npm run dev
+cd nextjs-example && npm install && npm run dev
+cd svelte-example && npm install && npm run dev
+cd vanilla-example && python3 -m http.server 8080
+```
+
+### 📋 예제 프로젝트 목록
+
+| 프레임워크 | 디렉토리 | 포트 | 특징 |
+|-----------|----------|------|------|
+| **Angular** | `angular-example/` | 3000 | TypeScript, RxJS, 서비스 패턴 |
+| **React** | `react-example/` | 3000 | Hooks, 커스텀 훅 패턴 |
+| **Vue** | `vue-example/` | 3000 | Composition API, 컴포저블 패턴 |
+| **Next.js** | `nextjs-example/` | 3000 | SSR, App Router, 프록시 설정 |
+| **Svelte** | `svelte-example/` | 3000 | 반응형 스토어, 컴포넌트 패턴 |
+| **Vanilla JS** | `vanilla-example/` | 8080 | 순수 JavaScript, 클래스 패턴 |
+
+### 🔧 각 예제의 주요 기능
+
+- ✅ **뷰어 초기화/제거**: 동적 뷰어 생성 및 정리
+- ✅ **템플릿 업데이트**: 실시간 템플릿 데이터 변경
+- ✅ **설정 관리**: 테마, 언어 등 설정 변경
+- ✅ **에러 핸들링**: 상세한 에러 처리 및 로깅
+- ✅ **상태 관리**: 뷰어 상태 추적 및 UI 반영
+- ✅ **CORS 해결**: 개발 환경 프록시 설정
+
 ## 🏗️ 프로젝트 구조
 
 ```
-node_modules/idev-viewer/
+idev-viewer-js/
 ├── dist/                    # JavaScript 라이브러리
 │   ├── idev-viewer.js       # UMD 번들
 │   ├── idev-viewer.esm.js   # ES 모듈 번들
 │   └── idev-viewer.d.ts     # TypeScript 타입 정의
-├── idev-app/                # IDev Web 앱
+├── examples/                # 예제 프로젝트들
+│   ├── angular-example/     # Angular 예제
+│   ├── react-example/       # React 예제
+│   ├── vue-example/         # Vue 예제
+│   ├── nextjs-example/      # Next.js 예제
+│   ├── svelte-example/      # Svelte 예제
+│   └── vanilla-example/     # Vanilla JS 예제
+├── src/                     # 소스 코드
+│   └── idev-viewer.js       # 메인 라이브러리
+├── idev-app/                # IDev Web 앱 (각 예제에 복사됨)
 │   ├── index.html           # 메인 HTML 파일
 │   ├── main.dart.js         # IDev 앱 메인 코드
 │   ├── flutter.js           # IDev 런타임
@@ -439,6 +864,66 @@ npm run dev
 - 개발 서버에서 프록시 설정 확인
 - IDev 앱과 메인 앱이 같은 도메인에서 실행되는지 확인
 - Next.js의 경우 `next.config.js`에서 rewrites 설정 확인
+- Angular의 경우 `proxy.conf.json` 설정 확인
+
+### CORS 해결 방법
+
+#### Angular 프록시 설정
+```json
+// proxy.conf.json
+{
+  "/aws": {
+    "target": "https://your-api-gateway-url.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/aws": ""
+    }
+  }
+}
+```
+
+```json
+// angular.json
+{
+  "serve": {
+    "options": {
+      "proxyConfig": "proxy.conf.json"
+    }
+  }
+}
+```
+
+#### Next.js 프록시 설정
+```javascript
+// next.config.js
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://your-api-gateway-url.com/:path*',
+      },
+    ];
+  },
+};
+```
+
+#### Flutter 앱 API 호스트 설정
+```html
+<!-- idev-app/index.html -->
+<script>
+  // API 호스트를 프록시로 설정
+  window.addEventListener('load', function() {
+    if (window.AppConfig && window.AppConfig.instance) {
+      window.AppConfig.instance.apiHostAws = '/aws';
+      window.AppConfig.instance.apiHostLegacyBase = '/aws';
+      window.AppConfig.instance.apiHostLegacySite = '/aws';
+    }
+  });
+</script>
+```
 
 #### 4. 라이브러리가 로드되지 않음
 - 스크립트 태그의 경로가 올바른지 확인
