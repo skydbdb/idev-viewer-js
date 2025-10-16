@@ -1,0 +1,16 @@
+<div class="logs">
+    <h3>📋 로그 및 상태</h3>
+
+    <div class="status">
+        현재 상태: {{ status }}
+    </div>
+
+    <div class="log-content">
+        <div *ngFor="let log of logs" class="log-entry">{{ log }}</div>
+        <div *ngIf="logs.length === 0" class="log-entry" style="color: #6c757d;">로그가 없습니다.</div>
+    </div>
+
+    <button class="btn btn-primary clear-logs" (click)="onClearLogs()">
+        🧹 로그 지우기
+    </button>
+</div>

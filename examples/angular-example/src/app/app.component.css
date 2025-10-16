@@ -1,0 +1,56 @@
+.container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
+    border-left: 4px solid #2196f3;
+}
+
+.info-panel h3 {
+    margin-top: 0;
+    color: #1976d2;
+}
+
+.info-panel ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.info-panel li {
+    margin-bottom: 5px;
+}
+
+.info-panel code {
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.viewer-container {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    min-height: 600px;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+}

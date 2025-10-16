@@ -48,6 +48,7 @@ pnpm-lock.yaml
 # Angular specific
 .angular/
 *.tsbuildinfo
+proxy.conf.json
 
 # React specific
 .eslintcache
@@ -58,15 +59,33 @@ pnpm-lock.yaml
 # Svelte specific
 .svelte-kit/
 
-# Flutter Web build files
-idev-app/
-*.dart.js
+# Next.js specific
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+.tscache/
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettiercache
+
+# Stylelint
+.stylelintcache
+
+# Flutter Web build files (개발용은 제외)
+# 예제의 Flutter 앱 파일들은 포함하되, 빌드 산출물만 제외
 *.dart.js.map
 canvaskit/
-flutter_bootstrap.js
 flutter_service_worker.js
-main.dart.js
 version.json
+
+# Flutter 빌드 산출물 (개발 서버에서 생성되는 것들)
+# idev-app/ 폴더는 예제에 필요하므로 주석 처리
+# idev-app/
 
 # Test files
 test-results/
@@ -77,3 +96,27 @@ test-results.xml
 *.tmp
 *.temp
 *.log
+
+# Development tools
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# Local development
+.local/
+.cache/
+.temp/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Lock files (선택적으로 유지할 수 있음)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>🚀 IDev Viewer Angular Example</h1>
+    <p>Flutter Web 앱을 iframe으로 렌더링하는 Angular 테스트 페이지입니다.</p>
+
+    <div class="info-panel">
+        <h3>📋 테스트 정보</h3>
+        <ul>
+            <li><strong>IDev 앱 경로:</strong> <code>{{ environment.idev.appPath }}</code></li>
+            <li><strong>라이브러리:</strong> <code>/assets/idev-viewer.js</code></li>
+            <li><strong>템플릿:</strong> <code>/assets/test-template.json</code></li>
+            <li><strong>API 키:</strong> <code>{{ environment.idev.apiKey.substring(0, 8) }}...</code></li>
+            <li><strong>테마:</strong> <code>{{ environment.idev.theme }}</code></li>
+            <li><strong>언어:</strong> <code>{{ environment.idev.locale }}</code></li>
+            <li><strong>라이브러리 상태:</strong>
+                <span [style.color]="isLibraryLoaded ? 'green' : 'red'">
+                    {{ isLibraryLoaded ? '✅ 로드됨' : '❌ 로드되지 않음' }}
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <app-viewer-controls [isReady]="isReady" [isLoading]="isLoading" [isLibraryLoaded]="isLibraryLoaded"
+        (init)="handleInitViewer()" (updateTemplate)="handleUpdateTemplate()" (destroyViewer)="handleDestroyViewer()">
+    </app-viewer-controls>
+
+    <div class="viewer-container" #viewerContainer id="viewer-container">
+        <div style="text-align: center; padding: 50px; color: #6c757d;">
+            <h3>🔄 뷰어 초기화 대기 중...</h3>
+            <p>초기화 버튼을 클릭하여 IDev Viewer를 시작하세요.</p>
+        </div>
+    </div>
+
+    <app-viewer-logs [logs]="logs" [status]="status"></app-viewer-logs>
+</div>

@@ -1,6 +1,6 @@
 {
     "name": "idev-viewer",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "description": "IDev-based template viewer with 100% identical rendering",
     "main": "dist/idev-viewer.js",
     "module": "dist/idev-viewer.esm.js",
