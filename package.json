@@ -1,6 +1,6 @@
 {
     "name": "idev-viewer",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "description": "IDev-based template viewer with 100% identical rendering",
     "main": "dist/idev-viewer.js",
     "module": "dist/idev-viewer.esm.js",
@@ -40,10 +40,10 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/idev/viewer.git"
+        "url": "https://github.com/skydbdb/idev-viewer-js"
     },
-    "homepage": "https://github.com/idev/viewer#readme",
+    "homepage": "https://idev.biz",
     "bugs": {
-        "url": "https://github.com/idev/viewer/issues"
+        "url": "https://github.com/skydbdb/idev-viewer-js/issues"
     }
 }
